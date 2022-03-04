@@ -37,6 +37,7 @@ const useAuth = () => {
       user.value = credentials.user.email;
     }
   };
+
   const logout = async () => {
     await signOut(firebaseAuth);
     isAuthenticated.value = false;
