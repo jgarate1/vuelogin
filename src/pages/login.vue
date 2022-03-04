@@ -5,7 +5,7 @@ import useAuth from "../composable/useAuth";
 import useError from "../composable/useError";
 import { useTimeout, promiseTimeout } from "@vueuse/core";
 
-const { isAuthenticated, login } = useAuth();
+const { isAuthenticated, login, signup} = useAuth();
 
 const username = ref("");
 const password = ref("");
@@ -14,13 +14,22 @@ const router = useRouter();
 
 const logginIn = async () => {
   await login(username.value, password.value);
+  goToHome();
+  }
+
+const signingUp = async () => {
+  await signup(username.value, password.value);
+  goToHome();
+};
+
+const goToHome = () => {
   if (isAuthenticated.value) {
     router.push("/");
   } else {
     setError("Invalid username or password");
     start();
   }
-};
+}
 
 const { error, setError } = useError();
 
@@ -48,13 +57,22 @@ const { ready, start } = useTimeout(3000, { controls: true });
           placeholder="Password"
           v-model="password"
         />
-        <button
+        <div class = "flex space-x-2">
+          <button
           type="submit"
           @submit.prevent="logginIn"
-          class="py-2 text-indigo-200 bg-indigo-600 rounded-lg"
+          class="w-1/2 py-2 text-indigo-200 bg-indigo-600 rounded-lg"
         >
           Login
         </button>
+        <button
+          @click="signingUp"
+          class="w-1/2 py-2 text-indigo-200 bg-green-600 rounded-lg"
+        >
+          Sign Up
+        </button>
+        </div>
+        
       </form>
     </div>
     <div
