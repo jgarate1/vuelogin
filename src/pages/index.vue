@@ -11,10 +11,10 @@ const { isAuthenticated, user } = useAuth();
       v-if="!isAuthenticated"
       class="text-6xl tracking-tighter font-extralight"
     >
-      Welcome to my website!
+      Welcome to my website
     </h2>
     <h2 v-else class="text-6xl tracking-tighter font-extralight">
-      Welcome master {{ user }}.
+      Welcome master {{ user }}
     </h2>
     <img src="../assets/bgindex.png" alt="Hello BG" />
   </div>
