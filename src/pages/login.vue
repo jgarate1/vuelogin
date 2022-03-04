@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import useAuth from "../composable/useAuth";
 import useError from "../composable/useError";
-
+import { useTimeout, promiseTimeout } from "@vueuse/core";
 const { isAuthenticated, login, signup } = useAuth();
 
 const username = ref("");
@@ -31,8 +31,6 @@ const goToHome = () => {
 };
 
 const { error, setError } = useError();
-
-import { useTimeout, promiseTimeout } from "@vueuse/core";
 
 const { ready, start } = useTimeout(3000, { controls: true });
 </script>
